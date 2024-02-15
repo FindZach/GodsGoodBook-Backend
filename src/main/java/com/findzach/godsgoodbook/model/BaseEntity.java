@@ -1,9 +1,8 @@
 package com.findzach.godsgoodbook.model;
 
-
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author: Zach Smith
@@ -15,29 +14,25 @@ public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "creation_date")
-    private Date entityCreationDate;
-    @PrePersist
-    protected void onCreate() {
-        entityCreationDate = new Date();
-    }
+    @Column(name = "created_date", nullable = false, updatable = false)
+    private LocalDateTime createdDate;
 
-    public long getId() {
+    // Getters and setters
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Date getEntityCreationDate() {
-        return entityCreationDate;
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
     }
 
-    public void setEntityCreationDate(Date entityCreationDate) {
-        this.entityCreationDate = entityCreationDate;
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 }
