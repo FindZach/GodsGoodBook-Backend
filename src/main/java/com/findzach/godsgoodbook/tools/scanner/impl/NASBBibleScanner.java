@@ -32,18 +32,6 @@ import java.util.List;
 @Service
 public class NASBBibleScanner extends BibleScanner implements CommandLineRunner {
 
-    @Autowired
-    private BookRepository bookRepository;
-
-    @Autowired
-    private ChapterRepository chapterRepository;
-
-    @Autowired
-    private VerseRepository verseRepository;
-
-    // Remove the constructor that autowires the repositories
-    // Constructor injection is redundant when using field injection with @Autowired
-
     @Override
     public void run(String... args) throws Exception {
         // Call the startScan method directly within the run method

@@ -1,6 +1,10 @@
 package com.findzach.godsgoodbook.tools.scanner;
 
 import com.findzach.godsgoodbook.tools.BibleScanJob;
+import com.findzach.godsgoodbook.web.repository.bible.BookRepository;
+import com.findzach.godsgoodbook.web.repository.bible.ChapterRepository;
+import com.findzach.godsgoodbook.web.repository.bible.VerseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author: Zach Smith
@@ -8,6 +12,15 @@ import com.findzach.godsgoodbook.tools.BibleScanJob;
  * @time: 11:15 PM
  */
 public abstract class BibleScanner implements BibleScanJob {
+
+    @Autowired
+    protected BookRepository bookRepository;
+
+    @Autowired
+    protected ChapterRepository chapterRepository;
+
+    @Autowired
+    protected VerseRepository verseRepository;
 
     private int totalRecordsProcessed = 0;
     private String bibleState = "Loading...";
