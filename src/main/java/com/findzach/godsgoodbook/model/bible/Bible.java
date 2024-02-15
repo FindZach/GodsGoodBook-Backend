@@ -21,7 +21,15 @@ public class Bible extends BaseEntity {
     @Column(name = "title")
     private String translationName;
 
+    @Column(name = "abbreviation")
     private String abbreviatedName;
+
+    @Column(name = "year_created")
+    private int yearCreated;
+
+    private String description;
+
+    private String publisher;
 
     @OneToMany(mappedBy = "bible", cascade = CascadeType.ALL)
     private List<Book> books;
@@ -51,5 +59,29 @@ public class Bible extends BaseEntity {
 
     public void setAbbreviatedName(String abbreviatedName) {
         this.abbreviatedName = abbreviatedName;
+    }
+
+    public int getYearCreated() {
+        return yearCreated;
+    }
+
+    public void setYearCreated(int yearCreated) {
+        this.yearCreated = yearCreated;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 }
