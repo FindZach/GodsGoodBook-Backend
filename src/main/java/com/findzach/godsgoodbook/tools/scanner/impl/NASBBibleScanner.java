@@ -26,7 +26,7 @@ import java.util.List;
 public class NASBBibleScanner extends BibleScanner {
 
     private final String bibleRawURL = "https://raw.githubusercontent.com/FindZach/GodsGoodBook-Backend/develop/src/main/resources/static/bible-data/nasb-raw.txt";
-    private Bible nasbBible;
+
 
     protected void startScan() {
         toggleJob(true); // Turn to false if no scanning is needed
@@ -121,7 +121,7 @@ public class NASBBibleScanner extends BibleScanner {
                             bible.setAbbreviatedName("nasb");
                             bible = bibleRepository.save(bible);
 
-                            this.nasbBible = bible;
+                            this.bibleToScan = bible;
                         }
 
                         // Create or retrieve the book entity
@@ -163,10 +163,6 @@ public class NASBBibleScanner extends BibleScanner {
 
             // Save all books and their related entities in bulk within a transaction
             bookRepository.saveAll(booksToSave);
-
-            System.out.println("Completed Data Load... Total Verses Saved: " + verseRepository.count());
-            System.out.println("Completed Data Load... Total Books for this Bible " + bookRepository.findBooksByBible(nasbBible).size());
-
         }
     }
 

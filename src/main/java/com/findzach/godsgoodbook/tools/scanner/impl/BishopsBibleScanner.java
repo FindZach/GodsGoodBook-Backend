@@ -23,7 +23,6 @@ import java.util.List;
 public class BishopsBibleScanner extends BibleScanner {
 
     private final String bibleRawURL = "https://raw.githubusercontent.com/FindZach/GodsGoodBook-Backend/develop/src/main/resources/static/bible-data/bishops.json";
-    private Bible bible;
     @Override
     protected void startScan() {
         toggleJob(true);
@@ -61,13 +60,13 @@ public class BishopsBibleScanner extends BibleScanner {
                 String moduleVersion = metadataNode.get("module_version").asText();
 
                 if (bibleRepository.findBibleByAbbreviatedName(shortName) == null) {
-                    this.bible = new Bible();
-                    this.bible.setTranslationName(name);
-                    this.bible.setAbbreviatedName(module);
-                    this.bible.setYearCreated(Integer.valueOf(year));
-                    this.bible.setLang(lang);
+                    this.bibleToScan = new Bible();
+                    this.bibleToScan.setTranslationName(name);
+                    this.bibleToScan.setAbbreviatedName(module);
+                    this.bibleToScan.setYearCreated(Integer.valueOf(year));
+                    this.bibleToScan.setLang(lang);
 
-                    this.bible = bibleRepository.save(this.bible);
+                    this.bibleToScan = bibleRepository.save(this.bibleToScan);
                 }
             }
 
@@ -85,7 +84,7 @@ public class BishopsBibleScanner extends BibleScanner {
                     if (book == null) {
                         book = new Book();
                         book.setBookName(bookName);
-                        book.setBible(bible);
+                        book.setBible(bibleToScan);
                         // Save or persist the book entity before setting its reference in the verse
                         book = bookRepository.save(book); // Ensure that the saved book is assigned back to the 'book' variable
                     }
@@ -117,9 +116,5 @@ public class BishopsBibleScanner extends BibleScanner {
 
         // Save all books and their related entities in bulk within a transaction
         bookRepository.saveAll(booksToSave);
-
-        System.out.println("Completed Data Load... Total Verses Saved: " + verseRepository.count());
-        System.out.println("Completed Data Load... Total Books for this Bible " + bookRepository.findBooksByBible(bible).size());
-
     }
 }

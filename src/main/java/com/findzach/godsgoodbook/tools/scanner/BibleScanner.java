@@ -1,5 +1,6 @@
 package com.findzach.godsgoodbook.tools.scanner;
 
+import com.findzach.godsgoodbook.model.bible.Bible;
 import com.findzach.godsgoodbook.tools.BibleScanJob;
 import com.findzach.godsgoodbook.web.repository.bible.BibleRepository;
 import com.findzach.godsgoodbook.web.repository.bible.BookRepository;
@@ -27,6 +28,7 @@ public abstract class BibleScanner implements BibleScanJob, CommandLineRunner {
     @Autowired
     protected VerseRepository verseRepository;
 
+    protected Bible bibleToScan;
     private int totalRecordsProcessed = 0;
     private String bibleState = "Loading...";
     private boolean executing = false;
@@ -65,6 +67,8 @@ public abstract class BibleScanner implements BibleScanJob, CommandLineRunner {
     @Override
     public void run(String... args) {
         startScan();
+        System.out.println("Completed Data Load... Total Verses Saved: " + verseRepository.count());
+        System.out.println("Completed Data Load for " + bibleToScan.getTranslationName() + " Total Books = " + bookRepository.findBooksByBible(bibleToScan).size());
     }
 
 }
