@@ -25,7 +25,7 @@ import java.util.List;
 @Service
 public class NASBBibleScanner extends BibleScanner {
 
-    private final String bibleRawURL = "https://raw.githubusercontent.com/FindZach/GodsGoodBook-Backend/develop/src/main/resources/static/nasb-raw.txt";
+    private final String bibleRawURL = "https://raw.githubusercontent.com/FindZach/GodsGoodBook-Backend/develop/src/main/resources/static/bible-data/nasb-raw.txt";
     private Bible nasbBible;
 
     protected void startScan() {
