@@ -7,7 +7,11 @@ package com.findzach.godsgoodbook.tools;
  *
  * Will display details about the current job
  */
-public interface JobDetails {
+public interface BibleScanJob {
+    int getTotalProcessed();
+    String getJobState();
+    void toggleJob(boolean newState);
+    boolean isJobRunning();
 
 
 }
