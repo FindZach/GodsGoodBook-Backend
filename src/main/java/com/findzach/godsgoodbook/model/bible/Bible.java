@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +21,8 @@ public class Bible extends BaseEntity {
     @Column(name = "title")
     private String translationName;
 
+    private String abbreviatedName;
+
     @OneToMany(mappedBy = "bible", cascade = CascadeType.ALL)
     private List<Book> books;
 
@@ -32,10 +35,21 @@ public class Bible extends BaseEntity {
     }
 
     public List<Book> getBooks() {
+        if (books == null) {
+            books = new ArrayList<>(); // Initialize the books collection if not already initialized
+        }
         return books;
     }
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public String getAbbreviatedName() {
+        return abbreviatedName;
+    }
+
+    public void setAbbreviatedName(String abbreviatedName) {
+        this.abbreviatedName = abbreviatedName;
     }
 }

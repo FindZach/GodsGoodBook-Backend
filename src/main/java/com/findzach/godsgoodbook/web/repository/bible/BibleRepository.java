@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface BibleRepository extends JpaRepository<Bible, Long> {
+    Bible findBibleByAbbreviatedName(String abbreviatedName);
 }

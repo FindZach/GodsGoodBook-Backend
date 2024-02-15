@@ -15,9 +15,6 @@ import java.util.List;
 @Entity
 public class Book extends BaseEntity {
 
-    @Column(name = "book_id")
-    private String bookId;
-
     @Column(name = "book_name")
     private String bookName;
 
@@ -27,14 +24,6 @@ public class Book extends BaseEntity {
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<Chapter> chapters;
-
-    public String getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(String bookId) {
-        this.bookId = bookId;
-    }
 
     public String getBookName() {
         return bookName;
@@ -50,5 +39,13 @@ public class Book extends BaseEntity {
 
     public void setChapters(List<Chapter> chapters) {
         this.chapters = chapters;
+    }
+
+    public Bible getBible() {
+        return bible;
+    }
+
+    public void setBible(Bible bible) {
+        this.bible = bible;
     }
 }

@@ -5,6 +5,8 @@ import com.findzach.godsgoodbook.model.bible.chapter.Chapter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author: Zach Smith
  * @date: 2/14/2024
@@ -13,4 +15,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChapterRepository extends JpaRepository<Chapter, Long> {
     Chapter findByBookAndChapterNumber(Book book, int chapterNumber);
+
 }
