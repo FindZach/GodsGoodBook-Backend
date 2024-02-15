@@ -32,4 +32,16 @@ public abstract class BibleScanner implements BibleScanJob {
     public boolean isJobRunning() {
         return executing;
     }
+
+    public void setTotalRecordsProcessed(int totalRecordsProcessed) {
+        this.totalRecordsProcessed = totalRecordsProcessed;
+    }
+
+    @Override
+    public void setJobState(String bibleState) {
+        this.bibleState = bibleState;
+    }
+
+    protected abstract void startScan();
+
 }

@@ -11,6 +11,8 @@ public interface BibleScanJob {
     int getTotalProcessed();
     String getJobState();
     void toggleJob(boolean newState);
+
+    void setJobState(String jobState);
     boolean isJobRunning();
 
 

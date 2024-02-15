@@ -17,7 +17,7 @@ public abstract class BaseEntity {
     private Long id;
 
     @Column(name = "created_date", nullable = false, updatable = false)
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now(); // Set default value
 
     // Getters and setters
     public Long getId() {

@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToOne;
  */
 @Entity
 public class Verse extends BaseEntity {
+
     @Column(name = "verse")
     private int verseNumber;
 
@@ -24,4 +25,27 @@ public class Verse extends BaseEntity {
     @JoinColumn(name = "chapter_id")
     private Chapter chapter;
 
+    public int getVerseNumber() {
+        return verseNumber;
+    }
+
+    public void setVerseNumber(int verseNumber) {
+        this.verseNumber = verseNumber;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Chapter getChapter() {
+        return chapter;
+    }
+
+    public void setChapter(Chapter chapter) {
+        this.chapter = chapter;
+    }
 }

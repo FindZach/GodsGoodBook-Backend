@@ -1,11 +1,9 @@
 package com.findzach.godsgoodbook.model.bible.book;
 
 import com.findzach.godsgoodbook.model.BaseEntity;
+import com.findzach.godsgoodbook.model.bible.Bible;
 import com.findzach.godsgoodbook.model.bible.chapter.Chapter;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 
@@ -22,6 +20,10 @@ public class Book extends BaseEntity {
 
     @Column(name = "book_name")
     private String bookName;
+
+    @ManyToOne
+    @JoinColumn(name = "bible_id")
+    private Bible bible;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private List<Chapter> chapters;
