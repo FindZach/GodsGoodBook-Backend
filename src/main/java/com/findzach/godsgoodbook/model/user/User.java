@@ -1,5 +1,6 @@
 package com.findzach.godsgoodbook.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.findzach.godsgoodbook.model.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
@@ -16,6 +17,7 @@ import jakarta.persistence.Table;
 @Table(name = "users") // Specify a different table name
 public class User extends BaseEntity {
     private String username;
+
     private String email;
 
     // Getters and setters for username and email
