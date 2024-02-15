@@ -107,32 +107,30 @@ public class NASBBibleScanner extends BibleScanner {
                     }
 
                     String[] parsedBook = parsedString[1].split(" ");
-                    String bookText = parsedBook[0];
                     String[] parsedChapterVerse = parsedBook[1].split(":");
                    // System.out.println("Line: " + line);
                     try {
                         int chapterNumber = Integer.parseInt(parsedChapterVerse[0]);
                         int verseNumber = Integer.parseInt(parsedChapterVerse.length > 1 ? parsedChapterVerse[1] : parsedChapterVerse[0]);
-
                         Bible bible = bibleRepository.findBibleByAbbreviatedName("nasb");
                         if (bible == null) {
                             bible = new Bible();
                             bible.setTranslationName("New American Standard Bible");
                             bible.setAbbreviatedName("nasb");
-                            bible = bibleRepository.save(bible);
-
-                            this.bibleToScan = bible;
+                            this.bibleToScan = bibleRepository.save(bible);
                         }
 
-                        // Create or retrieve the book entity
+                        String bookText = bibleToScan.getAbbreviatedName() + " - " +  parsedBook[0];
+
                         Book book = bookRepository.findByBookName(bookText);
                         if (book == null) {
                             book = new Book();
                             book.setBookName(bookText);
-                            book.setBible(bible);
-                            // Save or persist the book entity before setting its reference in the verse
-                            book = bookRepository.save(book); // Ensure that the saved book is assigned back to the 'book' variable
+                            // Other fields initialization
+                            book.setBible(this.bibleToScan);
                         }
+                        //book.addBible(bible); // Associate the book with the provided bible
+                        book = bookRepository.save(book); // Save the book entity
 
                         // Create or retrieve the chapter entity
                         Chapter chapter = chapterRepository.findByBookAndChapterNumber(book, chapterNumber);
@@ -154,6 +152,7 @@ public class NASBBibleScanner extends BibleScanner {
                         verse = verseRepository.save(verse);
 
                     } catch (Exception e) {
+                        e.printStackTrace();
                         System.out.println("Cannot load " + parsedString[1]);
                     }
                 }
@@ -162,7 +161,7 @@ public class NASBBibleScanner extends BibleScanner {
             }
 
             // Save all books and their related entities in bulk within a transaction
-            bookRepository.saveAll(booksToSave);
+           // bookRepository.saveAll(booksToSave);
         }
     }
 

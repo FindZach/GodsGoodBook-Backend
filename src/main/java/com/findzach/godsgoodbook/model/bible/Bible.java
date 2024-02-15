@@ -25,7 +25,7 @@ public class Bible extends BaseEntity {
     private String abbreviatedName;
 
     @Column(name = "year_created")
-    private int yearCreated;
+    private String yearCreated;
 
     @Column(name = "language")
     private String lang;
@@ -64,11 +64,11 @@ public class Bible extends BaseEntity {
         this.abbreviatedName = abbreviatedName;
     }
 
-    public int getYearCreated() {
+    public String getYearCreated() {
         return yearCreated;
     }
 
-    public void setYearCreated(int yearCreated) {
+    public void setYearCreated(String yearCreated) {
         this.yearCreated = yearCreated;
     }
 

@@ -31,6 +31,7 @@ public abstract class BibleScanner implements BibleScanJob, CommandLineRunner {
     protected Bible bibleToScan;
     private int totalRecordsProcessed = 0;
     private String bibleState = "Loading...";
+    protected String bibleRawURL;
     private boolean executing = false;
 
     @Override
@@ -67,8 +68,11 @@ public abstract class BibleScanner implements BibleScanJob, CommandLineRunner {
     @Override
     public void run(String... args) {
         startScan();
-        System.out.println("Completed Data Load... Total Verses Saved: " + verseRepository.count());
-        System.out.println("Completed Data Load for " + bibleToScan.getTranslationName() + " Total Books = " + bookRepository.findBooksByBible(bibleToScan).size());
+        if (isJobRunning()) {
+            System.out.println("Completed Data Load... Total Verses Saved: " + verseRepository.count());
+            System.out.println("Total Books for the " + this.bibleToScan.getTranslationName() +": " + bookRepository.findBooksByBible(this.bibleToScan).size());
+            //System.out.println("Completed Data Load for " + bibleToScan.getTranslationName() + " Total Books = " + bookRepository.findBooksByBibles((Arrays.asList(bibleToScan)).size()));
+        }
     }
 
 }

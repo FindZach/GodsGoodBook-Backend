@@ -17,15 +17,13 @@ import java.util.List;
 /**
  * @author: Zach Smith
  * @date: 2/15/2024
- * @time: 7:59 AM
+ * @time: 12:01 PM
  */
 @Service
-public class BishopsBibleScanner extends SuperSearchScanner {
-    private final String bibleRawURL = "https://raw.githubusercontent.com/FindZach/GodsGoodBook-Backend/develop/src/main/resources/static/bible-data/bishops.json";
-
+public class KJVBibleScanner extends SuperSearchScanner {
     @Override
     protected String getBibleURL() {
-        return bibleRawURL;
+        return "https://raw.githubusercontent.com/FindZach/GodsGoodBook-Backend/develop/src/main/resources/static/bible-data/kjv.json";
     }
 
 }

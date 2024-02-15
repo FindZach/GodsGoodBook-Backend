@@ -26,7 +26,7 @@ public class Book extends BaseEntity {
     private List<Chapter> chapters;
 
     public String getBookName() {
-        return bookName;
+        return bookName.split(" - ")[1];
     }
 
     public void setBookName(String bookName) {
