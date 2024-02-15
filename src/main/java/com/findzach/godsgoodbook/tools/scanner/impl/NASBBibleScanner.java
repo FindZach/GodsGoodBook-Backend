@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,7 @@ import java.util.List;
 @Service
 public class NASBBibleScanner extends BibleScanner {
 
+    private final String bibleRawURL = "https://raw.githubusercontent.com/FindZach/GodsGoodBook-Backend/develop/src/main/resources/static/nasb-raw.txt";
     private Bible nasbBible;
 
     protected void startScan() {
@@ -32,7 +35,7 @@ public class NASBBibleScanner extends BibleScanner {
             setJobState("Starting to scan");
             List<Book> booksToSave = new ArrayList<>();
 
-            try (BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/static/nasb-raw.txt"))) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(bibleRawURL).openStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     // Skip empty lines
