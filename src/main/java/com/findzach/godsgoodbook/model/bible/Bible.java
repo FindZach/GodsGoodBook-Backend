@@ -27,6 +27,9 @@ public class Bible extends BaseEntity {
     @Column(name = "year_created")
     private int yearCreated;
 
+    @Column(name = "language")
+    private String lang;
+
     private String description;
 
     private String publisher;
@@ -83,5 +86,13 @@ public class Bible extends BaseEntity {
 
     public void setPublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
     }
 }
