@@ -9,6 +9,7 @@ import com.findzach.godsgoodbook.model.bible.dto.ChapterDTO;
 import com.findzach.godsgoodbook.model.bible.dto.VerseDTO;
 import com.findzach.godsgoodbook.model.bible.verse.Verse;
 import com.findzach.godsgoodbook.web.service.BibleService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +29,34 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/bible")
 public class BibleController {
 
+    private static int currentCounter = 1;
     @Autowired
     private BibleService bibleService;
 
     @GetMapping("/all")
-    public List<BibleDTO> getAllBiblesWithBooksChaptersAndVerses() {
-        System.out.println("Request for all bibles...");
+    public List<BibleDTO> getAllBiblesWithBooksChaptersAndVerses(HttpServletRequest request) {
         List<Bible> bibles = bibleService.getAllBibles();
+        String clientIp = getClientIp(request);
+        System.out.println("Request from IP: " + clientIp);
+        System.out.println("Current User Request Count: " + currentCounter);
+        currentCounter++;
+        // Return the DTOs as before
         return bibles.stream()
                 .map(this::convertToBibleDto)
                 .collect(Collectors.toList());
+    }
+
+    private String getClientIp(HttpServletRequest request) {
+        String remoteAddr = "";
+
+        if (request != null) {
+            remoteAddr = request.getHeader("X-FORWARDED-FOR");
+            if (remoteAddr == null || "".equals(remoteAddr)) {
+                remoteAddr = request.getRemoteAddr();
+            }
+        }
+
+        return remoteAddr;
     }
 
     private BibleDTO convertToBibleDto(Bible bible) {
